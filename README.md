@@ -77,8 +77,3 @@ Below are some screenshots showcasing the functionality and user interface of th
 <img src="https://github.com/user-attachments/assets/5b0a8ba1-ac5a-4051-bf93-b60d7945aaaa" width="300"/>
 <img src="https://github.com/user-attachments/assets/3101a54a-6a7d-4620-b073-ced5ce60097b" width="300"/>
 
-### Additional Desktop Screenshots
-
-<img src="https://github.com/user-attachments/assets/c7819d73-d3f8-453e-91e5-14fbfe9ba44c" width="400
-
-
