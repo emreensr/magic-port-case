@@ -1,66 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MagicPort Case Study
+This project is a basic project management tool that allows users to manage projects and tasks. The project is developed using **Laravel** and **Vue.js** and is structured with a **Service Layer architecture**.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The Service Layer pattern was used to make the project modular and to control the business logic. This approach ensures that the code is cleaner, easier to maintain, and more reusable.
 
-## About Laravel
+The Service Layer contains classes specific to each business domain, such as projects (ProjectService) and tasks (TaskService). Controllers depend directly on these Service classes and only call these Services to perform specific tasks.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+In addition to the core requirements, I also implemented several bonus features. These include **Advanced Search & Filtering**, which allows users to search projects by name. **Dockerization** for simplified setup and deployment, and **Unit Testing** to ensure the application’s key functionalities are thoroughly tested and reliable.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Requirements & Deployment
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+[Docker Desktop](https://www.docker.com/get-started/#h_installation) has to be installed and running.
 
-## Learning Laravel
+**Step 1**: Clone the repo
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+git clone https://github.com/emreensr/magic-port-case.git
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+**Step 2**: Go inside the project directory from command prompt terminal
+```bash
+cd magic-port-case
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Step 3**: Set Up Environment Variables
+```bash
+cp .env.example .env
+```
 
-## Laravel Sponsors
+**Step 4**: Start the docker containers using the following command
+```bash
+docker-compose up -d
+```
+**Step 5**: Install Composer Dependencies
+```bash
+docker-compose exec app composer install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+**Step 6**: Generate Application Key
+```bash
+docker-compose exec app php artisan key:generate
+```
 
-### Premium Partners
+**Step 7**: Run Database Migrations
+```bash
+docker-compose exec app php artisan migrate
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+**Step 8**: Seed the Database
+```bash
+docker-compose exec app php artisan db:seed
+```
 
-## Contributing
+This will create a user with the following credentials:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Email: john.doe@example.com
+- Password: password123
+  
+You can use these credentials to log in to the application.
 
-## Code of Conduct
+**Step 9**: Compile Frontend Assets
+```bash
+npm install && npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Project Screenshots
 
-## Security Vulnerabilities
+Below are some screenshots showcasing the functionality and user interface of the project across different devices.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Desktop View
 
-## License
+<img src="https://github.com/user-attachments/assets/a86e8cd5-daf9-4b60-a282-25b89f7e88a0" width="400"/>
+<img src="https://github.com/user-attachments/assets/ce06dcfd-921a-4a2a-9570-b1b8bf3212b5" width="400"/>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Mobile View
+
+<img src="https://github.com/user-attachments/assets/5b0a8ba1-ac5a-4051-bf93-b60d7945aaaa" width="300"/>
+<img src="https://github.com/user-attachments/assets/3101a54a-6a7d-4620-b073-ced5ce60097b" width="300"/>
+
+### Additional Desktop Screenshots
+
+<img src="https://github.com/user-attachments/assets/c7819d73-d3f8-453e-91e5-14fbfe9ba44c" width="400
+
+
