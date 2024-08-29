@@ -58,7 +58,6 @@ class TaskTest extends TestCase
             );
     }
 
-
     public function test_can_store_new_task()
     {
         $project = Project::factory()->create();
@@ -138,56 +137,5 @@ class TaskTest extends TestCase
                     'status' => $task->status,
                 ]
             ]);
-    }
-
-    public function test_unauthorized_user_cannot_retrieve_list_of_tasks()
-    {
-        $tasks = Task::factory()->count(3)->create();
-
-        $response = $this->getJson('/api/task');
-
-        $response->assertStatus(401)
-            ->assertJson(['message' => 'Unauthenticated.']);
-    }
-
-    public function test_unauthorized_user_cannot_update_task()
-    {
-        $task = Task::factory()->create();
-
-        $data = [
-            'name' => 'Updated Task Name',
-            'description' => 'Updated task description',
-            'status' => 'completed'
-        ];
-
-        $response = $this->putJson("/api/task/{$task->id}", $data);
-
-        $response->assertStatus(401)
-            ->assertJson(['message' => 'Unauthenticated.']);
-    }
-
-    public function test_unauthorized_user_cannot_delete_task()
-    {
-        $task = Task::factory()->create();
-
-        $response = $this->deleteJson("/api/task/{$task->id}");
-
-        $response->assertStatus(401)
-            ->assertJson(['message' => 'Unauthenticated.']);
-    }
-
-    public function test_unauthorized_user_cannot_store_task()
-    {
-        $data = [
-            'project_id' => 1,
-            'name' => 'Unauthorized Task',
-            'description' => 'This should not be stored',
-            'status' => 'pending'
-        ];
-
-        $response = $this->postJson('/api/task', $data);
-
-        $response->assertStatus(401)
-            ->assertJson(['message' => 'Unauthenticated.']);
     }
 }

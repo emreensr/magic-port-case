@@ -21,7 +21,7 @@ class ProjectResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'created_at' => $this->created_at->toDateTimeString(),
-            'updated_at' => Carbon::parse($this->updated_at)->diffForHumans(), // Relative time
+            'updated_at' => Carbon::parse($this->updated_at)->diffForHumans(),
             'tasks' => TaskResource::collection($this->tasks),
         ];
     }
