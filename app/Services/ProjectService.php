@@ -12,7 +12,7 @@ class ProjectService
     public function list()
     {
         try {
-            return Project::with('tasks')->get();
+            return Project::with('tasks')->latest()->get();
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
             throw new Exception($exception->getMessage(), 422);

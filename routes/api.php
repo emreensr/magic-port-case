@@ -10,21 +10,21 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::prefix('project')->name('project.')->group(function () {
-    Route::get('/', [ProjectController::class, 'index']);
-    Route::get('/show/{project}', [ProjectController::class, 'show']);
-    Route::post('/', [ProjectController::class, 'store']);
-    Route::match(['put', 'patch'], '/{project}', [ProjectController::class, 'update']);
-    Route::delete('/{project}', [ProjectController::class, 'destroy']);
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::prefix('project')->name('project.')->group(function () {
+        Route::get('/', [ProjectController::class, 'index']);
+        Route::get('/show/{project}', [ProjectController::class, 'show']);
+        Route::post('/', [ProjectController::class, 'store']);
+        Route::match(['put', 'patch'], '/{project}', [ProjectController::class, 'update']);
+        Route::delete('/{project}', [ProjectController::class, 'destroy']);
+    });
+
+    Route::prefix('task')->name('task.')->group(function () {
+        Route::get('/', [TaskController::class, 'index']);
+        Route::get('/show/{task}', [TaskController::class, 'show']);
+        Route::post('/', [TaskController::class, 'store']);
+        Route::match(['put', 'patch'], '/{task}', [TaskController::class, 'update']);
+        Route::delete('/{task}', [TaskController::class, 'destroy']);
+    });
 });
-
-
-Route::prefix('task')->name('task.')->group(function () {
-    Route::get('/', [TaskController::class, 'index']);
-    Route::get('/show/{task}', [TaskController::class, 'show']);
-    Route::post('/', [TaskController::class, 'store']);
-    Route::match(['put', 'patch'], '/{task}', [TaskController::class, 'update']);
-    Route::delete('/{task}', [TaskController::class, 'destroy']);
-});
-
-

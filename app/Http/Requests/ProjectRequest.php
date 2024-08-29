@@ -21,6 +21,7 @@ class ProjectRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'name'             => ['required', 'string', 'max:190'],
             'description'      => ['nullable', 'string', 'max:5000'],

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class ProjectResource extends JsonResource
 {
@@ -20,7 +21,8 @@ class ProjectResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'created_at' => $this->created_at->toDateTimeString(),
-            'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
+            'updated_at' => Carbon::parse($this->updated_at)->diffForHumans(), // Relative time
+            'tasks' => TaskResource::collection($this->tasks),
         ];
     }
 }
